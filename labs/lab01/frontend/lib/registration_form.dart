@@ -28,6 +28,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
       setState(() {
         _successMessage = 'Registration successful!';
       });
+      // Очистить поля после успешной регистрации (если нужно)
+      _nameController.clear();
+      _emailController.clear();
+      _passwordController.clear();
     } else {
       setState(() {
         _successMessage = null;
@@ -62,77 +66,88 @@ class _RegistrationFormState extends State<RegistrationForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Card(
-        elevation: 6,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(Icons.person_add, size: 60, color: Colors.blueGrey),
-                const SizedBox(height: 16),
-                TextFormField(
-                  key: const Key('name'),
-                  controller: _nameController,
-                  decoration: InputDecoration(
-                    labelText: 'Name',
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                  ),
-                  validator: _validateName,
-                ),
-                const SizedBox(height: 12),
-                TextFormField(
-                  key: const Key('email'),
-                  controller: _emailController,
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                  ),
-                  validator: _validateEmail,
-                ),
-                const SizedBox(height: 12),
-                TextFormField(
-                  key: const Key('password'),
-                  controller: _passwordController,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                  ),
-                  validator: _validatePassword,
-                ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: _submitForm,
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Registration Form'),
+      ),
+      body: Center(
+        child: Card(
+          elevation: 6,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.person_add, size: 60, color: Colors.blueGrey),
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    key: const Key('name'),
+                    controller: _nameController,
+                    decoration: InputDecoration(
+                      labelText: 'Name',
+                      border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: const Text('Submit'),
+                    validator: _validateName,
                   ),
-                ),
-                if (_successMessage != null) ...[
-                  const SizedBox(height: 16),
-                  Text(
-                    _successMessage!,
-                    style: const TextStyle(
-                      color: Colors.green,
-                      fontWeight: FontWeight.w600,
+                  const SizedBox(height: 12),
+                  TextFormField(
+                    key: const Key('email'),
+                    controller: _emailController,
+                    decoration: InputDecoration(
+                      labelText: 'Email',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    validator: _validateEmail,
+                  ),
+                  const SizedBox(height: 12),
+                  TextFormField(
+                    key: const Key('password'),
+                    controller: _passwordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    validator: _validatePassword,
+                  ),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: _submitForm,
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: const Text('Submit'),
                     ),
                   ),
-                ]
-              ],
+                  if (_successMessage != null) ...[
+                    const SizedBox(height: 16),
+                    Text(
+                      _successMessage!,
+                      style: const TextStyle(
+                        color: Colors.green,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ]
+                ],
+              ),
             ),
           ),
         ),

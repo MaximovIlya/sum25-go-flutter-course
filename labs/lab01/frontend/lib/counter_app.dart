@@ -11,67 +11,55 @@ class _CounterAppState extends State<CounterApp> {
   int _counter = 0;
 
   void _increment() {
-    setState(() {
-      _counter++;
-    });
+    setState(() => _counter++);
   }
 
   void _decrement() {
-    setState(() {
-      _counter--;
-    });
+    setState(() => _counter--);
   }
 
   void _reset() {
-    setState(() {
-      _counter = 0;
-    });
+    setState(() => _counter = 0);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 6,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Counter App'),
       ),
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.all(20),
+      body: Center(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               _counter.toString(),
               style: const TextStyle(fontSize: 25),
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconButton(
+                FloatingActionButton(
+                  heroTag: 'increment',
                   onPressed: _increment,
-                  icon: const Icon(
-                    Icons.add,
-                  ),
+                  child: const Icon(Icons.add),
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
-                IconButton(
+                const SizedBox(width: 10),
+                FloatingActionButton(
+                  heroTag: 'decrement',
                   onPressed: _decrement,
-                  icon: const Icon(Icons.remove),
+                  child: const Icon(Icons.remove),
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
+                const SizedBox(width: 10),
+                // Заменяем FloatingActionButton на IconButton
                 IconButton(
                   onPressed: _reset,
                   icon: const Icon(Icons.refresh),
+                  tooltip: 'Reset',
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

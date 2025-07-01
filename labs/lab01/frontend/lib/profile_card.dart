@@ -34,7 +34,7 @@ class ProfileCard extends StatelessWidget {
               backgroundColor: Colors.grey.shade200,
               child: avatarUrl == null
                   ? Text(
-                      name.isNotEmpty ? name[0].toUpperCase() : '',
+                      name.isNotEmpty ? name[0].toUpperCase() : '?',
                       style: const TextStyle(fontSize: 24, color: Colors.grey),
                     )
                   : null,
@@ -43,7 +43,7 @@ class ProfileCard extends StatelessWidget {
             Text(
               name,
               style: const TextStyle(
-                fontSize: 20,
+                fontSize: 24, 
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
@@ -51,9 +51,9 @@ class ProfileCard extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               email,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
-                color: Colors.grey[700],
+                color: Colors.grey, 
               ),
             ),
             const SizedBox(height: 8),
